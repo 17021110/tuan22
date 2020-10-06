@@ -8,66 +8,13 @@ import SideBar from "./components/SideBar";
 import Container from "./components/Container";
 import _ from "lodash";
 import "./App.css";
+import Homepage from "./components/Homepage";
+import { data } from "./components/data";
 // import { data } from "./components/data";
 
 function App() {
-  const [list, setList] = useState([
-    {left:null,top:null,
-      condition: "",
-      name: "AIR",
-      img: "air.png",
-      show: true
-    },
-
-    {left:null,top:null,
-      condition: "",
-      name: "EARTH",
-      img: "earth.png",
-      show: true
-    },
-    {left:null,top:null,
-      condition: "",
-      name: "FIRE",
-      img: "fire.png",
-      show: true
-    },
-    {left:null,top:null,
-      condition: "",
-      name: "WATER",
-      img: "water.png",
-      show: true
-    },
-    {left:null,top:null,
-      condition: "AIR AIR",
-      name: "PRESSURE",
-      img: "pressure.png",
-      show: false
-    },
-    {left:null,top:null,
-      condition: "FIRE FIRE",
-      name: "ENERGY",
-      img: "energy.png",
-      show: false
-    },
-    {left:null,top:null,
-      condition: "WATER WATER",
-      name: "SEA",
-      img: "sea.png",
-      show: false
-    },
-    {left:null,top:null,
-      condition: "EARTH SEA",
-      name: "PLANET",
-      img: "planet.png",
-      show: false
-    },
-    {left:null,top:null,
-      condition: "FIRE WATER",
-      name: "STEAM",
-      img: "steam.png",
-      show: false
-    }
-  ]);
+  
+  const [list, setList] = useState(data);
   const show = item => {
     let indexList = _.findIndex(list, o=>o.name === item.name );
     setList([
@@ -75,7 +22,7 @@ function App() {
       {...item, show: true, },
       ..._.slice(list, indexList + 1)
     ]);
-    console.log(indexList, item.name);
+   
   };
   return (
     <div className="App">
@@ -84,6 +31,7 @@ function App() {
         <Container listItem={list} show={show} />
         <SideBar listItems={list} />
       </DndProvider>
+      {/* <Homepage></Homepage> */}
     </div>
   );
 }

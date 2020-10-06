@@ -3,10 +3,10 @@ import { useDrag, useDrop } from "react-dnd";
 import ItemTypes from "./ItemTypes";
 import "./style.css";
 
-const Item = ({ item, source, combine, hideSourceOnDrag, left, top}) => {
-  // const initialItem = {}
+const Item = ({ item, source, combine, hideSourceOnDrag, left, top,id}) => {
+
   const [{isDragging, canDrag}, drag] = useDrag({
-    item: { type: ItemTypes.ITEM, name: item.name, img: item.img,source,left,top},
+    item: { type: ItemTypes.ITEM, name: item.name, img: item.img,source,left,top,id},
     collect: monitor => ({
       canDrag : monitor.canDrag(),
       isDragging : monitor.isDragging(),
@@ -23,10 +23,8 @@ const Item = ({ item, source, combine, hideSourceOnDrag, left, top}) => {
       )
       return
       combineItem()
-      
-      console.log("item", left);
       setHasDropped(true);
-      // combine(dispatch({type:'ADD'}))
+     
     },
     collect: monitor => ({
       dropItem: monitor.getItem(),
@@ -38,15 +36,7 @@ const Item = ({ item, source, combine, hideSourceOnDrag, left, top}) => {
     combine(item, dropItem);
   };
 
-  // const reducer = (item,action) => {
-  //   switch(action.type){
-  //     case 'ADD':
-  //       return <img src={require('../Images/water.png')} alt="anh" />;
-  //     default:
-  //       return initialItem;
-  //   }
-  // }
-  // const [,dispatch] = useReducer(reducer,initialItem);
+
   
 
 hideSourceOnDrag = source === "dustbin" ? true:false
@@ -58,12 +48,12 @@ hideSourceOnDrag = source === "dustbin" ? true:false
   let refType = canDrag ? drag : drop
 
   return (
-    <div>
+    
       <div ref={refType} className="items" style={{left,top}}>
         <img src={require("../Images/" + item.img)} alt="anh" />
         <div className="text">{item.name}</div>
       </div>
-    </div>
+    
   );
 };
 export default Item;

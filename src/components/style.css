@@ -1,31 +1,54 @@
 .listcss {
-    width: 20%;
-    height: 918px;
-    background-color: rgb(78, 8, 144);
-    position: absolute;
+    width: 200px;
+    height: 900px;
+    background-color: #260026;
+    position: relative;
+    display: block;
+    color: #d79f47;
+    
 }
 
-.items {
+.listcss .items {
     cursor: move;
     width: 80px;
     height: 80px;
-    margin: 2px 0 0 80px;
+   display: flex;
     position: relative;
+    text-align: center;
+    align-items: center;
+}
+.dustbin .items {
+    cursor: move;
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    border-radius: 40px;
 }
 
 .dustbin {
-    width: 80%;
-    height: 908px;
-    float: right;
+    width: 100%;
+    height: 900px;
     color: white;
-    padding: 5px;
+    right: 0px;
     line-height: 5px;
     display: inline-flex;
-    background-color: rgb(218, 76, 218);
-    position: relative;
+    background-color: #1b001c;
+    position: absolute;;
+   
 }
 
 .text {
     font-family: 'Times New Roman', Times, serif;
     align-content: center;
+}
+.total{
+    position: absolute;
+    color:white;
+    height:100px;
+    width: 200px;
+    left: 200px;
+    top:20px;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
 }
