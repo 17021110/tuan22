@@ -11,7 +11,7 @@ const Container = ({ listItem, show, hideSourceOnDrag }) => {
   const newlist = listItem.filter(l => l.show===true);
   const length=newlist.length;
   const legth1=listItem.length;
-  console.log(length)
+  // console.log(length)
   // console.log(listItem)
   // const [id,setId]=useState('');
   const [hasDropped, setHasDropped] = useState(false);
@@ -33,7 +33,7 @@ const Container = ({ listItem, show, hideSourceOnDrag }) => {
       const id=list.length+50;
       const top = Math.round(delta.y);
       if (item.source === "dustbin") {
-        if(left>300&&left<=1450 ){
+        if(left>200&&left<=1450 ){
         moveItem(item, left, top,id);
         return;
       }
@@ -152,6 +152,7 @@ const Container = ({ listItem, show, hideSourceOnDrag }) => {
       {listItem.length !== 0 &&
         list.map((item, index) => {
           const { left, top,id } = item;
+          console.log(removeItem)
           return (
             <Item
               key={index}

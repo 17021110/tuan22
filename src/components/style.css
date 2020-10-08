@@ -10,7 +10,7 @@
 
 .listcss .items {
     cursor: move;
-    width: 80px;
+    width: 200px;
     height: 80px;
    display: flex;
     position: relative;

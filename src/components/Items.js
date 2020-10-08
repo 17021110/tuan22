@@ -4,10 +4,10 @@ import ItemTypes from "./ItemTypes";
 import "./style.css";
 
 const Item = ({ item, source, combine,removeItem, hideSourceOnDrag, left, top,id,}) => {
-    // console.log(source);
+
     
   const [{isDragging, canDrag}, drag] = useDrag({
-    item: { type: ItemTypes.ITEM, name: item.name, img: item.img,source,left,top,id},
+    item: { type: ItemTypes.ITEM, name: item.name, img: item.img,removeItem,source,left,top,id,},
     
     collect: monitor => ({
       canDrag : monitor.canDrag(),
@@ -15,7 +15,7 @@ const Item = ({ item, source, combine,removeItem, hideSourceOnDrag, left, top,id
     }),
   });
  
-  const [HasDropped, setHasDropped] = useState(false);
+  const [, setHasDropped] = useState(false);
   const [{ dropItem }, drop] = useDrop({
     accept: ItemTypes.ITEM,
     drop() {
@@ -24,10 +24,10 @@ const Item = ({ item, source, combine,removeItem, hideSourceOnDrag, left, top,id
       console.log(source) // nguon lay tu the Item 
       
       if ((source === "list"&&dropItem.source==='dustbin'))
-          {console.log('xoa')
+          {
+            console.log('xoa')
             console.log(dropItem)
-    
-            removeItem(dropItem);
+            dropItem.removeItem(dropItem)
           
           }
       else if(source==='list'&&dropItem.source==='list'){
