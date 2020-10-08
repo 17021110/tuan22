@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import '../App.css';
-import { Nav, ButtonGroup, Button, Modal, Form, Col, Image } from 'react-bootstrap';
+import {  ButtonGroup, Button, Modal } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import * as Icon from 'react-feather';
 

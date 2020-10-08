@@ -8,13 +8,14 @@ import SideBar from "./components/SideBar";
 import Container from "./components/Container";
 import _ from "lodash";
 import "./App.css";
-import Homepage from "./components/Homepage";
+
 import { data } from "./components/data";
-// import { data } from "./components/data";
+
 
 function App() {
   
   const [list, setList] = useState(data);
+  
   const show = item => {
     let indexList = _.findIndex(list, o=>o.name === item.name );
     setList([
@@ -31,7 +32,6 @@ function App() {
         <Container listItem={list} show={show} />
         <SideBar listItems={list} />
       </DndProvider>
-      {/* <Homepage></Homepage> */}
     </div>
   );
 }

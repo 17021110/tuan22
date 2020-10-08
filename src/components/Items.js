@@ -3,27 +3,40 @@ import { useDrag, useDrop } from "react-dnd";
 import ItemTypes from "./ItemTypes";
 import "./style.css";
 
-const Item = ({ item, source, combine, hideSourceOnDrag, left, top,id}) => {
-
+const Item = ({ item, source, combine,removeItem, hideSourceOnDrag, left, top,id,}) => {
+    // console.log(source);
+    
   const [{isDragging, canDrag}, drag] = useDrag({
     item: { type: ItemTypes.ITEM, name: item.name, img: item.img,source,left,top,id},
+    
     collect: monitor => ({
       canDrag : monitor.canDrag(),
       isDragging : monitor.isDragging(),
     }),
   });
-  
-  const [, setHasDropped] = useState(false);
+ 
+  const [HasDropped, setHasDropped] = useState(false);
   const [{ dropItem }, drop] = useDrop({
     accept: ItemTypes.ITEM,
     drop() {
-      if (
-        (source === "list" && item.source === "list")
-        || (source === "list" && item.source === "dustbin")
-      )
-      return
-      combineItem()
-      setHasDropped(true);
+      console.log(dropItem) // cai minh keo 
+      console.log(item) // cai chua(bao gom) cai minh keo tha vao
+      console.log(source) // nguon lay tu the Item 
+      
+      if ((source === "list"&&dropItem.source==='dustbin'))
+          {console.log('xoa')
+            console.log(dropItem)
+    
+            removeItem(dropItem);
+          
+          }
+      else if(source==='list'&&dropItem.source==='list'){
+        console.log('khong duowc')
+      }
+      else{
+        combine(item, dropItem);
+        setHasDropped(true);
+    }
      
     },
     collect: monitor => ({
@@ -32,13 +45,7 @@ const Item = ({ item, source, combine, hideSourceOnDrag, left, top,id}) => {
       isOverCurrent: monitor.isOver({ shallow: true })
     })
   });
-  const combineItem = () => {
-    combine(item, dropItem);
-  };
-
-
   
-
 hideSourceOnDrag = source === "dustbin" ? true:false
   if (isDragging && hideSourceOnDrag) {
     return <div ref={drag} />
@@ -50,7 +57,7 @@ hideSourceOnDrag = source === "dustbin" ? true:false
   return (
     
       <div ref={refType} className="items" style={{left,top}}>
-        <img src={require("../Images/" + item.img)} alt="anh" />
+        <img src={require("../Images/" + item.img)} alt='img' />
         <div className="text">{item.name}</div>
       </div>
     

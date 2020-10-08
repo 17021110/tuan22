@@ -29,6 +29,7 @@ const Container = ({ listItem, show, hideSourceOnDrag }) => {
       const delta = monitor.getClientOffset();
       // console.log('tuan',delta)
       const left = Math.round(delta.x);
+      console.log(left)
       const id=list.length+50;
       const top = Math.round(delta.y);
       if (item.source === "dustbin") {
@@ -38,7 +39,7 @@ const Container = ({ listItem, show, hideSourceOnDrag }) => {
       }
       else  {
         
-        removeItem(item,id)
+        removeItem(item)
 
       } 
       }
@@ -59,15 +60,14 @@ const Container = ({ listItem, show, hideSourceOnDrag }) => {
   });
   const addItem = (item, left, top,id) => {
    
-   
-   
     setList(list.concat({ ...item, source: "dustbin", left, top,id }));
+   
    
    
   };
   const moveItem = (item, left, top) => {
     console.log(list)
-    console.log(item)
+    // console.log(item)
     let index =_.findIndex(list,o=>o.id===item.id)   
     console.log(index)
     setList(
@@ -79,17 +79,18 @@ const Container = ({ listItem, show, hideSourceOnDrag }) => {
     );
     
   };
-  const removeItem=(item,id)=>{
+  const removeItem=(item)=>{
     // console.log(item)
     // console.log(id)
     // console.log(list)
     let indexList = _.findIndex(list, o=>o.id === item.id );
-    console.log(indexList)
+   
     list.splice(indexList,1)
     // console.log(list)
 
     
   }
+
  
   const remoteAllitems=()=>{
     // console.log('xoa het')
@@ -104,6 +105,7 @@ const Container = ({ listItem, show, hideSourceOnDrag }) => {
     return b;
   };
   const combine = (item_first, item_second) => {
+   
     const combineItem = CombinDrop(item_first, item_second);
     const combineItem1= CombinDrop(item_second,item_first)
     if (combineItem) {
@@ -119,8 +121,6 @@ const Container = ({ listItem, show, hideSourceOnDrag }) => {
         },
         ..._.slice(list, indexList + 1)
       ];
-
-      console.log(newItem);
       setList([...newItem]);
       show(combineItem);
     }
@@ -137,9 +137,7 @@ const Container = ({ listItem, show, hideSourceOnDrag }) => {
             type: ItemTypes.ITEM
           },
           ..._.slice(list, indexList1 + 1)
-        ];
-  
-        console.log(newItem1);
+        ];      
         setList([...newItem1]);
         show(combineItem1);
       }
@@ -164,6 +162,8 @@ const Container = ({ listItem, show, hideSourceOnDrag }) => {
               top={top}
               hideSourceOnDrag={hideSourceOnDrag}
               id={id}
+              removeItem={removeItem}
+              
             />
             
           );
