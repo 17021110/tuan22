@@ -19,10 +19,10 @@ const Item = ({ item, source, combine,removeItem, hideSourceOnDrag, left, top,id
   const [{ dropItem }, drop] = useDrop({
     accept: ItemTypes.ITEM,
     drop() {
-      console.log(dropItem) // cai minh keo 
-      console.log(item) // cai chua(bao gom) cai minh keo tha vao
-      console.log(source) // nguon lay tu the Item 
-      
+      // console.log(dropItem) // cai minh keo 
+      // console.log(item) // cai chua(bao gom) cai minh keo tha vao
+      // console.log(source) // nguon lay tu the Item 
+  
       if ((source === "list"&&dropItem.source==='dustbin'))
           {
             console.log('xoa')
@@ -32,6 +32,7 @@ const Item = ({ item, source, combine,removeItem, hideSourceOnDrag, left, top,id
           }
       else if(source==='list'&&dropItem.source==='list'){
         console.log('khong duowc')
+        
       }
       else{
         combine(item, dropItem);

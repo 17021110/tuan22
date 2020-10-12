@@ -3,7 +3,7 @@ export const data = [{
         name: "AIR",
         img: "air.png",
         show: true,
-        id:1
+        id: 1
     },
 
     {
@@ -11,42 +11,42 @@ export const data = [{
         name: "EARTH",
         img: "earth.png",
         show: true,
-        id:2
+        id: 2
     },
     {
         condition: "",
         name: "FIRE",
         img: "fire.png",
         show: true,
-        id:3
+        id: 3
     },
     {
         condition: "",
         name: "WATER",
         img: "water.png",
         show: true,
-        id:4
+        id: 4
     },
     {
         condition: "AIR AIR",
         name: "PRESSURE",
         img: "pressure.png",
         show: false,
-        id:5
+        id: 5
     },
     {
         condition: "FIRE FIRE",
         name: "ENERGY",
         img: "energy.png",
         show: false,
-        id:6
+        id: 6
     },
     {
         condition: "WATER WATER",
         name: "SEA",
         img: "sea.png",
-        show: false
-        ,id:7
+        show: false,
+        id: 7
     },
     {
         left: null,
@@ -55,9 +55,9 @@ export const data = [{
         name: "PLANET",
         img: "planet.png",
         show: false,
-        id:8
+        id: 8
     },
- 
+
     {
         left: null,
         top: null,
@@ -65,7 +65,7 @@ export const data = [{
         name: "STEAM",
         img: "steam.png",
         show: false,
-        id:9
+        id: 9
     },
     {
         left: null,
@@ -74,7 +74,7 @@ export const data = [{
         name: "HUMAN",
         img: "human.png",
         show: false,
-        id:10
+        id: 10
     },
     {
         left: null,
@@ -83,17 +83,17 @@ export const data = [{
         name: "ICEMAN",
         img: "ice-man.png",
         show: false,
-        id:11
+        id: 11
     },
-    // {
-    //     left: null,
-    //     top: null,
-    //     condition: "WATER STEAM",
-    //     name: "ICEMAN",
-    //     img: "ice-man.png",
-    //     show: false,
-    //     id:12
-    // }
+    {
+        left: null,
+        top: null,
+        condition: "FIRE EARTH",
+        name: "BONE",
+        img: "bone.png",
+        show: false,
+        id: 12
+    },
     {
         left: null,
         top: null,
@@ -101,7 +101,7 @@ export const data = [{
         name: "FIREMAN",
         img: "fire-man.png",
         show: false,
-        id:12
+        id: 12
     },
     {
         left: null,
@@ -110,6 +110,6 @@ export const data = [{
         name: "IRONMAN",
         img: "iron-man.png",
         show: false,
-        id:18
+        id: 18
     },
 ]
