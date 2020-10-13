@@ -11,17 +11,15 @@ const Container = ({ listItem, show, hideSourceOnDrag }) => {
     const newlist = listItem.filter(l => l.show === true);
     const length = newlist.length;
     const legth1 = listItem.length;
-    // console.log(length)
-    // console.log(listItem)
-    // const [id,setId]=useState('');
+
     const [hasDropped, setHasDropped] = useState(false);
     const [, drop] = useDrop({
         accept: ItemTypes.ITEM,
         drop(item, monitor) {
             const didDrop = monitor.didDrop();
-            // console.log(didDrop)
+
             if (didDrop) {
-                console.log('drop')
+
 
                 return;
 
@@ -29,7 +27,7 @@ const Container = ({ listItem, show, hideSourceOnDrag }) => {
             const delta = monitor.getClientOffset();
             // console.log('tuan',delta)
             const left = Math.round(delta.x);
-            console.log(left)
+
             const id = list.length + 50;
             const top = Math.round(delta.y);
             if (item.source === "dustbin") {
@@ -43,10 +41,7 @@ const Container = ({ listItem, show, hideSourceOnDrag }) => {
                 }
             }
             if (item.source === "list") {
-                // const id1=list.length+50;
-                // setId(id1);
                 addItem(item, left, top, id);
-
             }
 
             setHasDropped(true);
@@ -68,7 +63,7 @@ const Container = ({ listItem, show, hideSourceOnDrag }) => {
         console.log(list)
             // console.log(item)
         let index = _.findIndex(list, o => o.id === item.id)
-        console.log(index)
+
         setList(
             [
                 ..._.slice(list, 0, index),
@@ -79,37 +74,32 @@ const Container = ({ listItem, show, hideSourceOnDrag }) => {
 
     };
     const removeItem = (item) => {
-        // console.log(item)
-        // console.log(id)
-        // console.log(list)
         let indexList = _.findIndex(list, o => o.id === item.id);
-
         list.splice(indexList, 1)
-            // console.log(list)
-
 
     }
 
 
     const remoteAllitems = () => {
-        // console.log('xoa het')
-        // console.log(list)
         setList([]);
 
     }
     const CombinDrop = (item_first, item_second) => {
         let a = item_first.name + " " + item_second.name;
         let b = _.find(data, item => a === item.condition);
-
         return b;
     };
     const combine = (item_first, item_second) => {
 
         const combineItem = CombinDrop(item_first, item_second);
         const combineItem1 = CombinDrop(item_second, item_first)
+        console.log(item_second)
         if (combineItem) {
-            let indexList = _.lastIndexOf(list, item_first);
-            let indexList1 = _.lastIndexOf(list, item_second);
+            let indexList = _.findIndex(list, o => o.id === item_first.id);
+            let indexList1 = _.findIndex(list, o => o.id === item_second.id);
+            console.log(item_second);
+            console.log(indexList1)
+            console.log(list)
             let newItem = [
                 ..._.slice(list, 0, indexList),
                 {
@@ -122,15 +112,25 @@ const Container = ({ listItem, show, hideSourceOnDrag }) => {
                 ..._.slice(list, indexList + 1),
 
             ];
-            newItem.splice(indexList1, 1);
+            if (item_second.source === 'dustbin') {
 
-            setList([...newItem]);
-            show(combineItem);
+                newItem.splice(indexList1, 1);
+                setList([...newItem]);
+                show(combineItem);
+            } else {
+
+                setList([...newItem]);
+                show(combineItem);
+            }
+
+
         } else {
             if (combineItem1) {
-                let indexList1 = _.lastIndexOf(list, item_first);
+                let indexList2 = _.findIndex(list, o => o.id === item_first.id);
+                let indexList3 = _.findIndex(list, o => o.id === item_second.id);
+
                 let newItem1 = [
-                    ..._.slice(list, 0, indexList1),
+                    ..._.slice(list, 0, indexList2),
                     {
                         ...combineItem1,
                         source: "dustbin",
@@ -138,10 +138,19 @@ const Container = ({ listItem, show, hideSourceOnDrag }) => {
                         top: item_first.top,
                         type: ItemTypes.ITEM
                     },
-                    ..._.slice(list, indexList1 + 1)
+                    ..._.slice(list, indexList2 + 1)
                 ];
-                setList([...newItem1]);
-                show(combineItem1);
+                if (item_second.source === 'dustbin') {
+
+                    newItem1.splice(indexList3, 1);
+                    setList([...newItem1]);
+                    show(combineItem1);
+                } else {
+
+                    setList([...newItem1]);
+                    show(combineItem1);
+                }
+
             }
         }
 
@@ -150,13 +159,11 @@ const Container = ({ listItem, show, hideSourceOnDrag }) => {
 
     return ( <
         div ref = { drop }
-        className = "dustbin" >
-
-        {
+        className = "dustbin" > {
             listItem.length !== 0 &&
             list.map((item, index) => {
                 const { left, top, id } = item;
-                console.log(removeItem)
+
                 return ( <
                     Item key = { index }
                     item = { item }
