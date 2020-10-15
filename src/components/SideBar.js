@@ -1,18 +1,24 @@
-import React from "react";
-import Item from "./Items";
-import "./style.css";
+import React from 'react';
+import PropTypes from 'prop-types';
+import Item from './Items';
+import './style.css';
 
+SideBar.propTypes = {
+  listItems: PropTypes.array,
+};
+SideBar.defaultProps = {
+  listItems: [],
+};
 
-
-function SideBar({ listItems }) {
+export default function SideBar(props) {
+  const {listItems} = props;
   return (
     <div className="listcss">
       {listItems.map(
-        (item, index) =>
-          item.show && <Item item={item} key={index} source="list" />
+          (item, index) =>
+            item.show && <Item item={item} key={index} source="list" />,
       )}
     </div>
   );
 }
 
-export default SideBar;
