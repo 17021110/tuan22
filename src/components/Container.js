@@ -98,25 +98,25 @@ const Container = ({ listItem, show, hideSourceOnDrag }) => {
     setList([]);
     
   }
-  const CombinDrop = (item_first, item_second) => {
-    let a = item_first.name + " " + item_second.name;
+  const CombinDrop = (itemFirst, itemSecond) => {
+    let a = itemFirst.name + " " + itemSecond.name;
     let b = _.find(data, item => a === item.condition);
     
     return b;
   };
-  const combine = (item_first, item_second) => {
+  const combine = (itemFirst, itemSecond) => {
    
-    const combineItem = CombinDrop(item_first, item_second);
-    const combineItem1= CombinDrop(item_second,item_first)
+    const combineItem = CombinDrop(itemFirst, itemSecond);
+    const combineItem1= CombinDrop(itemSecond,itemFirst)
     if (combineItem) {
-      let indexList = _.lastIndexOf(list, item_first);
+      let indexList = _.lastIndexOf(list, itemFirst);
       let newItem = [
         ..._.slice(list, 0, indexList),
         {
           ...combineItem,
           source: "dustbin",
-          left: item_first.left,
-          top: item_first.top,
+          left: itemFirst.left,
+          top: itemFirst.top,
           type: ItemTypes.ITEM
         },
         ..._.slice(list, indexList + 1)
@@ -126,14 +126,14 @@ const Container = ({ listItem, show, hideSourceOnDrag }) => {
     }
     else{
       if(combineItem1){
-        let indexList1 = _.lastIndexOf(list, item_first);
+        let indexList1 = _.lastIndexOf(list, itemFirst);
         let newItem1 = [
           ..._.slice(list, 0, indexList1),
           {
             ...combineItem1,
             source: "dustbin",
-            left: item_first.left,
-            top: item_first.top,
+            left: itemFirst.left,
+            top: itemFirst.top,
             type: ItemTypes.ITEM
           },
           ..._.slice(list, indexList1 + 1)
