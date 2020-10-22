@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render homepage 1`] = `
+<div>
+  <div
+    class="listcss"
+  />
+</div>
+`;
+
+exports[`should render sidebar 1`] = `
+<div>
+  <div
+    class="listcss"
+  />
+</div>
+`;
